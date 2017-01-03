@@ -72,13 +72,11 @@ void fill_table(GtkWidget *board,GtkWidget *table1,GtkWidget* buttons[]){
 
 }
 void refresh_table(GtkWidget *board,GtkWidget** buttons){
-  int row,column;
-  char aux;
   char *campoExplorado=g_object_get_data (G_OBJECT(board),"campoExplorado");
   for(int i=0;i<DIM;i++){
     for(int j=0;j<DIM;j++){
       gchar *aux=g_strdup_printf("%c",((char(*)[DIM])campoExplorado)[i][j]);
-      gtk_button_set_label(GTK_BUTTON(buttons[i*DIM+j]),aux);
+      gtk_button_set_label(GTK_BUTTON(buttons[i+DIM*j]),aux);
     }
   }
 }
@@ -166,9 +164,10 @@ GtkWidget* create_main_window(char campoExplorado[][DIM],int campoMinado[][DIM],
 }
 
 int main (int argc, char *argv[]){
-    GtkWidget *main_window, *board;
-    GtkWidget *table1,*toolbar;
-    GtkWidget *statusbar, *buttons[DIM*DIM];
+    GtkWidget *main_window=NULL, *board =NULL;
+    GtkWidget *table1=NULL,*toolbar = NULL;
+    GtkWidget *statusbar=NULL;
+    GtkWidget *buttons[DIM*DIM];
 
     char campoExplorado[DIM][DIM];
     int campoMinado[DIM][DIM];
