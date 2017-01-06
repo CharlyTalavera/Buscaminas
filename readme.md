@@ -5,4 +5,4 @@ La interfaz del juego está alojada en el archivo `gui.c`. Para compilarlo es ne
 
   En caso de no estar instalado se puede instalar con `sudo apt-get install libgtk-3-dev`.
 
-  El juego se compila con ```gcc `pkg-config --cflags --libs gtk+-3.0 ` *.c -o buscaminas  -pedantic -Werror -Wall```
+  El juego se compila con ``` gcc -Wall -Werror `pkg-config --cflags gtk+-3.0` *.c -o buscaminas `pkg-config --libs gtk+-3.0` ```
