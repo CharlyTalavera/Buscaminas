@@ -5,7 +5,8 @@
 #define MENSAJE_DERROTA "¡Perdiste!"
 #define MENSAJE_VICTORIA "¡GANASTE!"
 #define show(x) gtk_statusbar_push (GTK_STATUSBAR(statusbar), 0, x)
-
+#define WIDTH 250
+#define HEIGHT 300
 
 
 void show_board(int * campoMinado,GtkWidget *board){
@@ -31,7 +32,6 @@ void check_move(char* campoExplorado,int* campoMinado, int* row, int* column,Gtk
     show(MENSAJE_DERROTA);
     return;
   }
-  printf("Clickeaste fila: %d columna %d\n",*row,*column);
   inspeccionar((char(*)[DIM])campoExplorado,*row,*column);
   gchar *aux=g_strdup_printf("%c",EXPLORADO);
   gtk_button_set_label(button,aux);
@@ -159,15 +159,15 @@ GtkWidget* create_main_window(char campoExplorado[][DIM],int campoMinado[][DIM],
     fill_table(board,table1,buttons);
     gtk_box_pack_start(GTK_BOX(board), table1,true,true,10);
     create_status_bar(board,statusbar);
-
+    gtk_window_set_default_size(GTK_WINDOW(main_window),WIDTH,HEIGHT);
+    gtk_widget_set_margin_start(board,HEIGHT*0.1);
     return main_window;
 }
 
 int main (int argc, char *argv[]){
-    GtkWidget *main_window=NULL, *board =NULL;
-    GtkWidget *table1=NULL,*toolbar = NULL;
-    GtkWidget *statusbar=NULL;
-    GtkWidget *buttons[DIM*DIM];
+    GtkWidget *main_window=NULL, *board =NULL,
+              *table1=NULL,*toolbar = NULL,
+              *statusbar=NULL,*buttons[DIM*DIM];
 
     char campoExplorado[DIM][DIM];
     int campoMinado[DIM][DIM];
